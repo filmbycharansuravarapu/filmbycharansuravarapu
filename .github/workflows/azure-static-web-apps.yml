@@ -37,11 +37,11 @@ jobs:
           action: "upload"
           app_location: "/" # App source code path
           api_location: "" # Api source code path - leave empty if not used
-          output_location: "out" # Built app content directory
+          output_location: ".next" # Built app content directory
           app_build_command: "npm run build"
           api_build_command: ""
           skip_app_build: false
-          app_artifact_location: "out"
+          app_artifact_location: ".next"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
