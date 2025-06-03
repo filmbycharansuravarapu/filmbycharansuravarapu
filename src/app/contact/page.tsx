@@ -31,8 +31,9 @@ export default function Contact() {
     setTimeout(() => setSubmitted(false), 4000)
 
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbwLrIg3eSXuAa42rk7kIoVbAlE1aH82U-XCUrQN8UZ_0Nhk3kaF7vI6S2GzYSptPedm4Q/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbw0HXbiX3jHhwFWbOlDpsQhC8t6l1DseicSXfW-ZaUMRfP7bAU6aAxSzcvO09QNU9COyg/exec', {
         method: 'POST',
+        mode: 'no-cors',
         body: JSON.stringify(form),
         headers: { 'Content-Type': 'application/json' }
       });
@@ -61,12 +62,12 @@ export default function Contact() {
           <Link href="/contact" className="hover:text-accent transition-colors">Contact</Link>
         </div>
         <div className="flex gap-4">
-          <a href="#" aria-label="Instagram" className="hover:text-accent transition-colors">
-            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="#" aria-label="Facebook" className="hover:text-accent transition-colors">
-            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H5v4h5v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
+        <a href="https://www.instagram.com/filmby_charan_suravarapu_?igsh=dGNjajQ1dnJtenpt" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-accent transition-colors">
+                <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="#" aria-label="Facebook" className="hover:text-accent transition-colors">
+                <svg width="28" height="28" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H5v4h5v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
         </div>
       </nav>
 

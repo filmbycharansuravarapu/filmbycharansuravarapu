@@ -26,6 +26,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable} font-sans`}>
         {children}
+        <footer className="w-full text-center py-6 bg-[#181818] text-gray-400 border-t border-gray-700 mt-12">
+          © {new Date().getFullYear()} filmbycharansuravarapu. All Rights Reserved.
+        </footer>
       </body>
     </html>
   )

@@ -1,35 +1,75 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRef, useEffect } from 'react'
 
 export default function Home() {
+  // Wedding, Product, and Branding images
+  const weddingImages = [
+    '/assets/images/wedding/DSC01405.png',
+    '/assets/images/wedding/DSC01228.JPG',
+    '/assets/images/wedding/DSC01242.JPG',
+    '/assets/images/wedding/DSC08338.JPG',
+    '/assets/images/wedding/DSC01405.JPG',
+    '/assets/images/wedding/DSC01140.JPG',
+  ];
+  const productImages = [
+    '/assets/images/product/IMG_5689.JPG',
+    '/assets/images/product/IMG_5690.JPG',
+    '/assets/images/product/IMG_5691.JPG',
+    '/assets/images/product/IMG_5692.JPG',
+    '/assets/images/product/IMG_5694.JPG',
+    '/assets/images/product/IMG_5688 2.JPG',
+  ];
+  const brandingImages = [
+    '/assets/images/branding_identity/DSC01767.JPG',
+    '/assets/images/branding_identity/DSC01771.JPG',
+    '/assets/images/branding_identity/DSC01774.JPG',
+    '/assets/images/branding_identity/DSC02333.JPG',
+    '/assets/images/branding_identity/DSC01864.JPG',
+  ];
+
+  // Refs for carousels
+  const weddingRef = useRef<HTMLDivElement>(null);
+  const brandingRef = useRef<HTMLDivElement>(null);
+  const productRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll logic
+  useEffect(() => {
+    const refs = [weddingRef, brandingRef, productRef];
+    const intervals = refs.map(ref => {
+      let isPaused = false;
+      let interval = setInterval(() => {
+        const el = ref.current;
+        if (el && !isPaused) {
+          if (el.scrollLeft + el.offsetWidth >= el.scrollWidth - 1) {
+            el.scrollTo({ left: 0, behavior: 'auto' });
+          } else {
+            el.scrollBy({ left: 1, behavior: 'auto' });
+          }
+        }
+      }, 30);
+      // Pause on hover
+      const el = ref.current;
+      if (el) {
+        el.addEventListener('mouseenter', () => { isPaused = true; });
+        el.addEventListener('mouseleave', () => { isPaused = false; });
+      }
+      return interval;
+    });
+    return () => intervals.forEach(i => clearInterval(i));
+  }, []);
+
   return (
     <main className="min-h-screen bg-[#181818] text-white">
-      {/* Navigation Bar */}
-      <nav className="flex items-center justify-between px-8 py-6 border-b border-gray-700">
-        <div className="flex items-center gap-4">
-          <Image
-            src="/assets/images/logo/logo.jpg"
-            alt="FilmByCharansuravarapu Logo"
-            width={48}
-            height={48}
-            className="rounded-full bg-white object-contain"
-          />
-          <span className="text-2xl font-serif tracking-wide font-bold">FilmByCharansuravarapu</span>
-        </div>
-        <div className="flex gap-8 text-lg font-medium">
+      {/* Cover Section with Transparent Nav */}
+      <section className="relative h-[30vh] min-h-[200px] w-full flex items-start justify-end bg-cover bg-center" style={{ backgroundImage: `url('/assets/images/logo/coverimage.jpg')` }}>
+        <nav className="absolute top-0 right-0 mt-4 mr-8 flex gap-8 text-lg font-medium bg-black bg-opacity-40 rounded-bl-2xl px-8 py-4 z-10">
           <Link href="/" className="hover:text-accent transition-colors">Home</Link>
           <Link href="/portfolio" className="hover:text-accent transition-colors">Portfolio</Link>
           <Link href="/contact" className="hover:text-accent transition-colors">Contact</Link>
-        </div>
-        <div className="flex gap-4">
-          <a href="#" aria-label="Instagram" className="hover:text-accent transition-colors">
-            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-          <a href="#" aria-label="Facebook" className="hover:text-accent transition-colors">
-            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H5v4h5v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-        </div>
-      </nav>
+        </nav>
+      </section>
 
       {/* About/Quote Section */}
       <section className="py-12 px-4 text-center border-b border-gray-700">
@@ -39,74 +79,48 @@ export default function Home() {
         </p>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-serif text-center mb-16 text-accent">Portfolio Categories</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Wedding Category */}
-            <div className="group relative overflow-hidden rounded-lg border border-gray-700 bg-[#222]">
-              <Image
-                src="/assets/images/wedding/DSC01405.jpg"
-                alt="Wedding Photography"
-                width={400}
-                height={300}
-                className="w-full h-[400px] object-cover transition-transform duration-300 group-hover:scale-110 opacity-90"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white p-6">
-                <h3 className="text-2xl font-serif mb-4">Wedding Photography</h3>
-                <p className="text-center mb-6">Capturing your special moments with elegance and style</p>
-                <Link 
-                  href="/portfolio?category=wedding"
-                  className="border-2 border-white px-6 py-2 rounded-md hover:bg-white hover:text-black transition-colors"
-                >
-                  View Gallery
-                </Link>
-              </div>
+      {/* Wedding Carousel Section */}
+      <section className="py-4 px-4">
+        <h2 className="text-4xl font-serif mb-8 text-center text-[#df9438] tracking-wide drop-shadow-lg" style={{ fontFamily: 'Playfair Display, serif' }}>Wedding Photography</h2>
+        <div ref={weddingRef} className="flex gap-4 pb-4 overflow-x-auto no-scrollbar">
+          {weddingImages.map((src, idx) => (
+            <div key={idx} className="flex-shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 bg-[#222]">
+              <Image src={src} alt={`Wedding ${idx+1}`} width={256} height={160} className="w-full h-full object-cover" />
             </div>
+          ))}
+          <Link href="/portfolio?category=wedding" className="flex-shrink-0 w-64 h-40 flex items-center justify-center bg-[#181818] text-white font-bold rounded-lg border-2 border-gray-700 hover:bg-accent hover:text-black transition-colors text-xl">
+            View More →
+          </Link>
+        </div>
+      </section>
 
-            {/* Branding Category */}
-            <div className="group relative overflow-hidden rounded-lg border border-gray-700 bg-[#222]">
-              <Image
-                src="/assets/images/branding_identity/DSC01767.jpg"
-                alt="Branding & Identity"
-                width={400}
-                height={300}
-                className="w-full h-[400px] object-cover transition-transform duration-300 group-hover:scale-110 opacity-90"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white p-6">
-                <h3 className="text-2xl font-serif mb-4">Branding & Identity</h3>
-                <p className="text-center mb-6">Professional imagery that tells your brand's story</p>
-                <Link 
-                  href="/portfolio?category=branding"
-                  className="border-2 border-white px-6 py-2 rounded-md hover:bg-white hover:text-black transition-colors"
-                >
-                  View Gallery
-                </Link>
-              </div>
+      {/* Branding & Identity Carousel Section */}
+      <section className="py-4 px-4">
+        <h2 className="text-4xl font-serif mb-4 text-center text-[#df9438] tracking-wide drop-shadow-lg" style={{ fontFamily: 'Playfair Display, serif' }}>Branding & Identity</h2>
+        <div ref={brandingRef} className="flex gap-4 pb-4 overflow-x-auto no-scrollbar">
+          {brandingImages.map((src, idx) => (
+            <div key={idx} className="flex-shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 bg-[#222]">
+              <Image src={src} alt={`Branding ${idx+1}`} width={256} height={160} className="w-full h-full object-cover" />
             </div>
+          ))}
+          <Link href="/portfolio?category=branding_identity" className="flex-shrink-0 w-64 h-40 flex items-center justify-center bg-[#181818] text-white font-bold rounded-lg border-2 border-gray-700 hover:bg-accent hover:text-black transition-colors text-xl">
+            View More →
+          </Link>
+        </div>
+      </section>
 
-            {/* Product Category */}
-            <div className="group relative overflow-hidden rounded-lg border border-gray-700 bg-[#222]">
-              <Image
-                src="/assets/images/product/IMG_5689.jpg"
-                alt="Product Photography"
-                width={400}
-                height={300}
-                className="w-full h-[400px] object-cover transition-transform duration-300 group-hover:scale-110 opacity-90"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white p-6">
-                <h3 className="text-2xl font-serif mb-4">Product Photography</h3>
-                <p className="text-center mb-6">Showcase your products in their best light</p>
-                <Link 
-                  href="/portfolio?category=product"
-                  className="border-2 border-white px-6 py-2 rounded-md hover:bg-white hover:text-black transition-colors"
-                >
-                  View Gallery
-                </Link>
-              </div>
+      {/* Product Carousel Section */}
+      <section className="py-4 px-4">
+        <h2 className="text-4xl font-serif mb-4 text-center text-[#df9438] tracking-wide drop-shadow-lg" style={{ fontFamily: 'Playfair Display, serif' }}>Product Photography</h2>
+        <div ref={productRef} className="flex gap-4 pb-4 overflow-x-auto no-scrollbar">
+          {productImages.map((src, idx) => (
+            <div key={idx} className="flex-shrink-0 w-64 h-40 rounded-lg overflow-hidden border border-gray-700 bg-[#222]">
+              <Image src={src} alt={`Product ${idx+1}`} width={256} height={160} className="w-full h-full object-cover" />
             </div>
-          </div>
+          ))}
+          <Link href="/portfolio?category=product" className="flex-shrink-0 w-64 h-40 flex items-center justify-center bg-[#181818] text-white font-bold rounded-lg border-2 border-gray-700 hover:bg-accent hover:text-black transition-colors text-xl">
+            View More →
+          </Link>
         </div>
       </section>
     </main>
