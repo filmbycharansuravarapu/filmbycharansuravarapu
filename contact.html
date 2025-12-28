@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Film by Charan Suravarapu</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html">
+        <img src="assets/images/logo/logo.jpg" alt="Logo" class="logo">
+      </a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="wedding.html">Wedding</a>
+        <a href="brand-identity.html">Brand Identity</a>
+        <a href="product.html">Product</a>
+        <a href="event.html">Event</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contact Hero -->
+  <section class="contact-hero">
+    <div class="contact-hero-content">
+      <span class="page-hero-breadcrumb">Get in Touch</span>
+      <h1>Let's Create Together</h1>
+      <p>Have a project in mind? We'd love to hear from you. Fill out the form and let's start a conversation about bringing your vision to life.</p>
+    </div>
+    <div class="contact-hero-image">
+      <img src="assets/images/logo/coverimage.jpg" alt="Film by Charan">
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <h2>Get in Touch</h2>
+          <p>We're here to answer any questions you may have about our photography services. Reach out and we'll respond as soon as we can.</p>
+          
+          <div class="contact-details">
+            <div class="contact-detail">
+              <svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <div class="contact-detail-content">
+                <span>Email</span>
+                <p>filmbycharansuravarapu@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              <div class="contact-detail-content">
+                <span>Phone</span>
+                <p>+91 8464005350</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <svg viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <div class="contact-detail-content">
+                <span>Location</span>
+                <p>Vizag, Rajahmundry, Hyderabad</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="social-links">
+            <a href="https://www.instagram.com/filmby_charan_suravarapu_" target="_blank" class="social-link" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Contact Form -->
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <h3 class="form-title">Inquiry Form</h3>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name *</label>
+              <input type="text" id="name" name="name" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label for="contact">Contact Number *</label>
+              <input type="tel" id="contact" name="contact" required placeholder="+91 98765 43210">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="john@example.com">
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="event-date">Date of Event *</label>
+              <input type="date" id="event-date" name="event-date" required>
+            </div>
+            <div class="form-group">
+              <label for="event-type">Type of Event *</label>
+              <select id="event-type" name="event-type" required>
+                <option value="">Select event type</option>
+                <option value="wedding">Wedding</option>
+                <option value="brand-identity">Brand Identity</option>
+                <option value="product">Product Photography</option>
+                <option value="event">Event Coverage</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="place">Event Location / Place *</label>
+            <input type="text" id="place" name="place" required placeholder="City, Venue Name">
+          </div>
+          
+          <div class="form-group full-width">
+            <label for="notes">Additional Notes</label>
+            <textarea id="notes" name="notes" placeholder="Tell us about your vision, specific requirements, or any questions you have..."></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">Submit Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/images/logo/logo.jpg" alt="Logo" class="footer-logo">
+          <p>Capturing life's beautiful moments through the art of visual storytelling.</p>
+        </div>
+        <div class="footer-nav-section">
+          <h5 class="footer-nav-title">Quick Links</h5>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="wedding.html">Wedding</a>
+            <a href="brand-identity.html">Brand Identity</a>
+            <a href="product.html">Product</a>
+            <a href="event.html">Event</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+        <div class="footer-newsletter">
+          <h4>Let's Connect</h4>
+          <p>Ready to create something beautiful together? Get in touch for collaborations and bookings.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Film by Charan Suravarapu. All rights reserved.</p>
+        <p>Hyderabad, India</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Google Apps Script Web App URL
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzQdwiJi0d3zih7Q5UL6jHfg1V0guKwRSHsVZnneE_DeElO6cgZ8Dg6hjF3ayjNX3XKTg/exec';
+    
+    async function handleSubmit(event) {
+      event.preventDefault();
+      
+      const submitBtn = event.target.querySelector('.submit-btn');
+      const originalText = submitBtn.textContent;
+      
+      // Show loading state
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      
+      // Gather form data
+      const formData = {
+        name: document.getElementById('name').value,
+        contact: document.getElementById('contact').value,
+        email: document.getElementById('email').value,
+        eventDate: document.getElementById('event-date').value,
+        eventType: document.getElementById('event-type').value,
+        place: document.getElementById('place').value,
+        notes: document.getElementById('notes').value
+      };
+      
+      try {
+        // Send to Google Sheets
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        // With no-cors, we can't read the response, but if no error was thrown, assume success
+        // Show success message
+        alert('Thank you for your inquiry, ' + formData.name + '! We will get back to you within 24 hours.');
+        
+        // Reset form
+        event.target.reset();
+        
+      } catch (error) {
+        console.error('Error:', error);
+        // Even if there's a network error, the data might have been sent
+        alert('Your inquiry may have been sent. If you don\'t hear from us within 24 hours, please contact us directly at filmbycharansuravarapu@gmail.com');
+      } finally {
+        // Reset button
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
+
