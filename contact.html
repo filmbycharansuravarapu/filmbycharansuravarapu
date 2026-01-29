@@ -11,7 +11,7 @@
   <header class="header">
     <div class="container header-inner">
       <a href="index.html">
-        <img src="assets/images/logo/logo.jpg" alt="Logo" class="logo">
+        <img src="../../public/assets/images/logo/logo.jpg" alt="Logo" class="logo">
       </a>
       <nav class="nav">
         <a href="index.html">Home</a>
@@ -32,7 +32,7 @@
       <p>Have a project in mind? We'd love to hear from you. Fill out the form and let's start a conversation about bringing your vision to life.</p>
     </div>
     <div class="contact-hero-image">
-      <img src="assets/images/logo/coverimage.jpg" alt="Film by Charan">
+      <img src="../../public/assets/images/logo/coverimage.jpg" alt="Film by Charan">
     </div>
   </section>
 
@@ -139,7 +139,7 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="assets/images/logo/logo.jpg" alt="Logo" class="footer-logo">
+          <img src="../../public/assets/images/logo/logo.jpg" alt="Logo" class="footer-logo">
           <p>Capturing life's beautiful moments through the art of visual storytelling.</p>
         </div>
         <div class="footer-nav-section">
@@ -167,7 +167,8 @@
 
   <script>
     // Google Apps Script Web App URL
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzQdwiJi0d3zih7Q5UL6jHfg1V0guKwRSHsVZnneE_DeElO6cgZ8Dg6hjF3ayjNX3XKTg/exec';
+    // IMPORTANT: Deploy with "Execute as: Me" and "Who has access: Anyone"
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwHvsJ_EalQlQyPxQ1MhVElO5VmRg7YwviG30LaNuYoHdPpIDz8cGuqr8FQfXc30TPglw/exec';
     
     async function handleSubmit(event) {
       event.preventDefault();
@@ -191,27 +192,31 @@
       };
       
       try {
-        // Send to Google Sheets
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData)
+        // Create URL-encoded form data (Google Apps Script compatible)
+        const formBody = new URLSearchParams();
+        Object.keys(formData).forEach(key => {
+          formBody.append(key, formData[key]);
         });
         
-        // With no-cors, we can't read the response, but if no error was thrown, assume success
-        // Show success message
+        // Send to Google Apps Script
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors', // Required for Google Apps Script
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: formBody
+        });
+        
+        // With no-cors mode, we assume success if no error was thrown
         alert('Thank you for your inquiry, ' + formData.name + '! We will get back to you within 24 hours.');
         
         // Reset form
         event.target.reset();
         
       } catch (error) {
-        console.error('Error:', error);
-        // Even if there's a network error, the data might have been sent
-        alert('Your inquiry may have been sent. If you don\'t hear from us within 24 hours, please contact us directly at filmbycharansuravarapu@gmail.com');
+        console.error('Error submitting form:', error);
+        alert('Unable to submit the form. Please contact us directly at:\n\nEmail: filmbycharansuravarapu@gmail.com\nPhone: +91 8464005350');
       } finally {
         // Reset button
         submitBtn.textContent = originalText;
