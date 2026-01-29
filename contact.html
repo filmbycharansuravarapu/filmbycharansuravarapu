@@ -13,6 +13,12 @@
       <a href="index.html">
         <img src="assets/images/logo/logo.jpg" alt="Logo" class="logo">
       </a>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-overlay"></div>
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="wedding.html">Wedding</a>
@@ -156,6 +162,10 @@
         <div class="footer-newsletter">
           <h4>Let's Connect</h4>
           <p>Ready to create something beautiful together? Get in touch for collaborations and bookings.</p>
+          <a href="https://www.instagram.com/filmby_charan_suravarapu_" target="_blank" class="instagram-link">
+            <svg viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" fill="none" stroke="currentColor" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/></svg>
+            Follow on Instagram
+          </a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -166,6 +176,31 @@
   </footer>
 
   <script>
+    // Mobile Menu
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.nav');
+      const navOverlay = document.querySelector('.nav-overlay');
+      
+      function toggleMenu() {
+        menuToggle.classList.toggle('active');
+        nav.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+      }
+      
+      menuToggle.addEventListener('click', toggleMenu);
+      navOverlay.addEventListener('click', toggleMenu);
+      
+      nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            toggleMenu();
+          }
+        });
+      });
+    });
+
     // Google Apps Script Web App URL
     // IMPORTANT: Deploy with "Execute as: Me" and "Who has access: Anyone"
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwHvsJ_EalQlQyPxQ1MhVElO5VmRg7YwviG30LaNuYoHdPpIDz8cGuqr8FQfXc30TPglw/exec';

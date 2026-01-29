@@ -13,6 +13,12 @@
       <a href="index.html">
         <img src="assets/images/logo/logo.jpg" alt="Logo" class="logo">
       </a>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-overlay"></div>
       <nav class="nav">
         <a href="index.html" class="active">Home</a>
         <a href="wedding.html">Wedding</a>
@@ -23,6 +29,34 @@
       </nav>
     </div>
   </header>
+  
+  <!-- Mobile Menu Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.nav');
+      const navOverlay = document.querySelector('.nav-overlay');
+      
+      function toggleMenu() {
+        menuToggle.classList.toggle('active');
+        nav.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+      }
+      
+      menuToggle.addEventListener('click', toggleMenu);
+      navOverlay.addEventListener('click', toggleMenu);
+      
+      // Close menu when a nav link is clicked
+      nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (nav.classList.contains('active')) {
+            toggleMenu();
+          }
+        });
+      });
+    });
+  </script>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -54,7 +88,7 @@
       <div class="categories-grid">
         <!-- Wedding -->
         <a href="wedding.html" class="category-card fade-up fade-up-delay-1">
-          <img src="assets/images/wedding/DSC01140.JPG" alt="Wedding Photography">
+          <img src="assets/images/wedding/DSC01405.JPG" alt="Wedding Photography">
           <div class="category-info">
             <h3 class="category-name">Wedding</h3>
             <span class="category-view">
