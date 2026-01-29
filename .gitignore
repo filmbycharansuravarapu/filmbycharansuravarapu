@@ -1,0 +1,22 @@
+# Exclude development and backup folders from deployment
+website/
+redeploy-temp/
+public/
+
+# Node modules (if any)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
